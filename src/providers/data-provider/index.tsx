@@ -8,7 +8,7 @@ import DataProviderProps from './model';
 const DataProvider: React.FC<DataProviderProps> = ({ children }) => {
   const [appState, dispatch] = useReducer(dataReducer, initDataState);
   const dataContext = useMemo(() => [appState, dispatch], [appState]);
-  return <Provider store={store}></Provider>;
+  return <Provider store={store}>{children}</Provider>;
 };
 
 export default DataProvider;
