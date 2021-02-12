@@ -34,6 +34,7 @@ module.exports = {
     },
   },
   rules: {
+    "react/prop-types": "off",
     "comma-dangle": "off",
     "no-inner-declarations": "off",
     "class-methods-use-this": "off",
