@@ -7,4 +7,6 @@
 **/tsconfig.json
 **/postcss.config.js
 **/setup
+**/tailwind.config.js
+
 

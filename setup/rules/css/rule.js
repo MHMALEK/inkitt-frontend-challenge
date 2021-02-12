@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { cssRegex, cssModuleRegex, sassModuleRegex, sassRegex } = require('./regex');
 
 // utils
-const isDevEnv = require('../../utils/getEnv');
+const { isDevEnv } = require('../../utils/getEnv');
 
 // use extract mini plugin or not
 const getExternalCssOrInternalStyles = () => (isDevEnv ? 'style-loader' : MiniCssExtractPlugin.loader);
@@ -30,12 +30,9 @@ const getCssLoaderOptions = useCssModules => {
 };
 
 // to get Post CSS loader
-const getPostCssLoader = usePostCssLoader =>
-  usePostCssLoader
-    ? {
-        loader: 'postcss-loader',
-      }
-    : null;
+const getPostCssLoader = () => ({
+  loader: 'postcss-loader',
+});
 
 // css files rule
 const CSSRules = {
@@ -43,10 +40,10 @@ const CSSRules = {
   oneOf: [
     {
       test: cssModuleRegex,
-      use: [getExternalCssOrInternalStyles(), getPostCssLoader(), getCssLoaderOptions(true)],
+      use: [getExternalCssOrInternalStyles(), getCssLoaderOptions(true), getPostCssLoader()],
     },
     {
-      use: [getExternalCssOrInternalStyles(), getPostCssLoader(), getCssLoaderOptions(false)],
+      use: [getExternalCssOrInternalStyles(), getCssLoaderOptions(false), getPostCssLoader()],
     },
   ],
 };
@@ -57,33 +54,12 @@ const SassRules = {
   oneOf: [
     {
       test: sassModuleRegex,
-      use: [getExternalCssOrInternalStyles(), getPostCssLoader(), getCssLoaderOptions(true), getDefaultSassLoaderOptions()],
+      use: [getExternalCssOrInternalStyles(), getCssLoaderOptions(true), getPostCssLoader(), getDefaultSassLoaderOptions()],
     },
     {
-      use: [getExternalCssOrInternalStyles(), getPostCssLoader(), getCssLoaderOptions(false), getDefaultSassLoaderOptions()],
+      use: [getExternalCssOrInternalStyles(), getCssLoaderOptions(false), getPostCssLoader(), getDefaultSassLoaderOptions()],
     },
   ],
 };
 
 module.exports = { CSSRules, SassRules };
-
-
-
-// {
-//   test: /\.css$/,
-//   oneOf: [
-//     {
-//       test: /\.module\.css$/,
-//       use: [
-//         MiniCssExtractPlugin.loader,
-//         {
-//           loader: 'css-loader',
-//           options: { modules: true, exportOnlyLocals: false },
-//         },
-//       ],
-//     },
-//     {
-//       use: [MiniCssExtractPlugin.loader, 'css-loader'],
-//     },
-//   ],
-// },
