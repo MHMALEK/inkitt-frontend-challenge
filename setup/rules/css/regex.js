@@ -3,4 +3,7 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
-module.export = { cssRegex, cssModuleRegex, sassRegex, sassModuleRegex };
+exports.cssRegex = cssRegex;
+exports.cssModuleRegex = cssModuleRegex;
+exports.sassRegex = sassRegex;
+exports.sassModuleRegex = sassModuleRegex;

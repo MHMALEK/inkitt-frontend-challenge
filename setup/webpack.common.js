@@ -13,8 +13,6 @@ const { staticAssetsRuleWebpackVersionFive } = require('./rules/static/rule');
 const { extensions } = require('./extensions');
 const { alias } = require('./alias');
 
-console.log(typescriptAndJsRule);
-
 // utils
 const pathTo = require('./utils/pathTo');
 
@@ -27,8 +25,7 @@ module.exports = {
     globalObject: 'this',
   },
   module: {
-    // CSSRules, SassRules,
-    rules: [typescriptAndJsRule, sourceMapGeneratorRule, staticAssetsRuleWebpackVersionFive],
+    rules: [typescriptAndJsRule, CSSRules, SassRules, sourceMapGeneratorRule, staticAssetsRuleWebpackVersionFive],
   },
   plugins: [
     new webpack.EnvironmentPlugin({
