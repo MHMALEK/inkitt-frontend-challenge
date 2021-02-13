@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
-// mock data
-// utils
-import { randomIdGenerator } from 'Src/utils/generator';
-// immutable helper
-import update from 'immutability-helper';
+// component
+import CommentItem from 'Src/ui/components/common/comment-item';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -12,50 +9,13 @@ import {
 } from 'Store/modules/comments/action';
 import { State } from 'Store/index';
 
-const Comment: React.FC<any> = ({ data, add }) => {
-  const [commentData, setCommentData] = useState(data);
-  return (
-    <>
-      <div
-        style={{
-          borderLeft: '1px solid gray',
-          marginLeft: 20,
-        }}
-      >
-        id is {commentData.id} - name:{' '}
-        {commentData.user_name}
-        {commentData.replies &&
-          commentData.replies.map(
-            (item: any, index: number) => (
-              <Comment key={index} data={item} add={add} />
-            ),
-          )}
-      </div>
-      <button
-        onClick={() => {
-          const cc = {
-            user_name: 'MAlekkkkkkkkkk',
-            created_date: '',
-            replies: [],
-            id: randomIdGenerator(),
-          };
+// utils
+import { randomIdGenerator } from 'Src/utils/generator';
+import DEFAULT_PARAMS from 'Src/contstants';
+import AddNewCommentArea from 'Src/ui/components/common/comment-form';
 
-          const newCollection = update(data, {
-            replies: {
-              $push: [cc],
-            },
-          });
-          setCommentData(newCollection);
-        }}
-      >
-        add to {commentData.user_name}
-      </button>
-    </>
-  );
-};
-
-const MainScreen = () => {
-  const [name, setName] = useState('');
+const MainScreen: React.FC<Record<string, never>> = () => {
+  const [commentContent, setCommentContent] = useState('');
   const dispatch = useDispatch();
   const comments = useSelector(
     (state: State) => state.commentsState.commentsList,
@@ -68,44 +28,43 @@ const MainScreen = () => {
     dispatch(getCommentsAction());
   }, []);
 
-  const add = (cc: any): any => {
-    // const currentData = data;
-    // const newCollection = update(currentData, {
-    //   $push: [cc],
-    // });
-    // setData(newCollection);
-    dispatch(addCommentAction(cc));
+  const handleCommentContentChange: (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => void = ({ target: { value } }) => {
+    setCommentContent(value);
+  };
+
+  const addNewComment = (): void => {
+    dispatch(
+      addCommentAction({
+        id: randomIdGenerator(5),
+        user_name: DEFAULT_PARAMS.defaultUserName,
+        created_date: '',
+        up_votes: 10,
+        down_votes: 20,
+        replies: [],
+        content: commentContent,
+      }),
+    );
   };
 
   return (
     <>
       {comments.map(comment => {
         return (
-          <Comment
+          <CommentItem
             key={comment.id}
             data={comment}
-            add={add}
+            level={0}
           />
         );
       })}
-      <input
-        onChange={e => setName(e.target.value)}
-        value={name}
+
+      <AddNewCommentArea
+        onSubmit={addNewComment}
+        onChange={handleCommentContentChange}
+        value={commentContent}
       />
-      <button
-        onClick={() =>
-          add({
-            id: randomIdGenerator(5),
-            user_name: name,
-            created_date: '',
-            up_votes: 10,
-            down_votes: 20,
-            replies: [],
-          })
-        }
-      >
-        add to main
-      </button>
     </>
   );
 };

@@ -12,10 +12,12 @@ export enum ActionType {
 
 export type CommentListActionPayloadType = Array<{
   id: string;
-  name: string;
+  user_name: string;
   created_date: string;
   up_votes: number;
   down_votes: number;
+  replies: [];
+  content: string;
 }>;
 
 export type GetCommentsActionType = {
@@ -34,10 +36,12 @@ export type GetCommentsFailedActionType = {
 /* add comment actions */
 export interface AddCommentActionPayloadType {
   id: string;
-  name: string;
+  user_name: string;
   created_date: string;
   up_votes: number;
   down_votes: number;
+  replies: [];
+  content: string;
 }
 
 export interface AddCommentActionType {

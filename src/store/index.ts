@@ -19,6 +19,11 @@ export interface State {
   appState: AppState;
   commentsState: CommentsState;
 }
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION__: any;
+  }
+}
 
 const reducers = combineReducers({
   appState: appReducer,
@@ -31,8 +36,8 @@ const store: Store = createStore(
   reducers,
   compose(
     applyMiddleware(sagaMiddleware),
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__
-      ? (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+    (window as Window).__REDUX_DEVTOOLS_EXTENSION__
+      ? (window as Window).__REDUX_DEVTOOLS_EXTENSION__()
       : (noop: null) => noop,
   ),
 );

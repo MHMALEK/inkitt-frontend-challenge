@@ -1,6 +1,9 @@
 import initDataStateType from './model';
 
-const dataReducer = (state: initDataStateType, action: any) => {
+const dataReducer = (
+  state: initDataStateType,
+  action: unknown,
+) => {
   switch (action) {
     case action:
       return {

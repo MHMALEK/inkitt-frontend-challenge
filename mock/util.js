@@ -11,4 +11,21 @@ const generateUniqID = length => {
   return result;
 };
 
+const generateRandomNumber = max => {
+  return Math.floor(Math.random() * (max + 1));
+};
+
+// generate random date for comment if needed
+const randomDateGenerator = (
+  start = new Date(2012, 0, 1),
+  end = new Date(),
+) => {
+  return new Date(
+    start.getTime() +
+      Math.random() * (end.getTime() - start.getTime()),
+  );
+};
+
 exports.generateUniqID = generateUniqID;
+exports.generateRandomNumber = generateRandomNumber;
+exports.randomDateGenerator = randomDateGenerator;

@@ -4,12 +4,10 @@ import {
   put,
   select,
 } from 'redux-saga/effects';
-import getCommentsFromApiService from 'Src/services/api-call/modules/comments';
+import getCommentsFromApiService from 'Src/services/api-call/modules/comments/index';
 import {
-  addCommentAction,
   addCommentFailedAction,
   addCommentFulfilledAction,
-  CommentsActionType,
   getCommentsFailedAction,
   getCommentsFulfilledAction,
 } from './action';
