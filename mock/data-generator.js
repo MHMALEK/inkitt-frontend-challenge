@@ -335,16 +335,28 @@ const addIdToElemens = data => {
     'Nia',
     'Carolyn',
   ];
+  const randomAvatarUrls = [
+    'https://avatars.dicebear.com/4.5/v2/female/a66ebcd86e3ba5f787cabcc35b2cbbcb.svg',
+    'https://avatars.dicebear.com/4.5/v2/gridy/a66ebcd86e3ba5f787cabcc35b2cbbcb.svg',
+    'https://avatars.dicebear.com/4.5/v2/female/2f2d19b60491a4a1d7e6fd98dbb56826.svg',
+    'https://avatars.dicebear.com/4.5/v2/male/7c12fbe272ebf54f6ded2a471046bb90.svg',
+    'https://avatars.dicebear.com/4.5/v2/female/9a024d27d97e259fce7e45cc4a9d5f35.svg',
+  ];
   return data.reduce((prev, current) => {
     current.id = generateUniqID(5);
     current.created_date = randomDateGenerator();
     current.up_votes = generateRandomNumber(100);
     current.down_votes = generateRandomNumber(100);
+    current.content =
+      'some sample coment data. some sample coment data. some sample coment data. some sample coment data';
     current.user_name =
       randomNames[
         generateRandomNumber(randomNames.length - 1)
       ];
-    console.log(current);
+    current.avatar_url =
+      randomAvatarUrls[
+        generateRandomNumber(randomAvatarUrls.length - 1)
+      ];
     prev.push({ ...current });
     if (current.replies.length > 0) {
       addIdToElemens(current.replies);

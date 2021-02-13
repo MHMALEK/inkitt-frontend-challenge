@@ -18,6 +18,7 @@ export type CommentListActionPayloadType = Array<{
   down_votes: number;
   replies: [];
   content: string;
+  avatar_url: string;
 }>;
 
 export type GetCommentsActionType = {
@@ -42,6 +43,7 @@ export interface AddCommentActionPayloadType {
   down_votes: number;
   replies: [];
   content: string;
+  avatar_url: string;
 }
 
 export interface AddCommentActionType {

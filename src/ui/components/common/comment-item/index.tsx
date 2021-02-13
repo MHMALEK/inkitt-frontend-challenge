@@ -29,6 +29,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
       down_votes: 20,
       replies: [],
       content: commentContent,
+      avatar_url: DEFAULT_PARAMS.defaultAvatarUrl,
     };
     const currentData = commentData;
 
@@ -59,6 +60,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
     down_votes,
     replies,
     content,
+    avatar_url,
   } = commentData;
   return (
     <>
@@ -70,6 +72,13 @@ const CommentItem: React.FC<CommentItemProps> = ({
       >
         <div className='h-full border-2 border-gray-200 rounded-lg overflow-hidden'>
           <div className='p-6'>
+            <picture>
+              <img
+                src={avatar_url}
+                className='relative z-30 inline object-cover w-12 h-12 border-2 border-white rounded-full'
+                alt={`${user_name}-avatar`}
+              />
+            </picture>
             <h2 className='tracking-widest text-xs title-font font-medium text-gray-500 mb-1'>
               {user_name}
             </h2>

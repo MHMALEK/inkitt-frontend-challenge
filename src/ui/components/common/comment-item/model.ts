@@ -6,6 +6,7 @@ export interface CommentItemType {
   down_votes: number;
   replies: any;
   content: string;
+  avatar_url: string;
 }
 
 type CommentItemPropsType = {

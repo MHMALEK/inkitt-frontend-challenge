@@ -44,6 +44,7 @@ const MainScreen: React.FC<Record<string, never>> = () => {
         down_votes: 20,
         replies: [],
         content: commentContent,
+        avatar_url: DEFAULT_PARAMS.defaultAvatarUrl,
       }),
     );
   };
