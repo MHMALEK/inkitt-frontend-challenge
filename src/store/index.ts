@@ -6,8 +6,12 @@ import {
   applyMiddleware,
 } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import appReducer, { AppState } from 'Store/modules/app/reducer';
-import commentsReducer, { CommentsState } from 'Store/modules/comments/reducer';
+import appReducer, {
+  AppState,
+} from 'Store/modules/app/reducer';
+import commentsReducer, {
+  CommentsState,
+} from 'Store/modules/comments/reducer';
 
 import sagas from './saga';
 
@@ -18,7 +22,7 @@ export interface State {
 
 const reducers = combineReducers({
   appState: appReducer,
-  commentState: commentsReducer,
+  commentsState: commentsReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

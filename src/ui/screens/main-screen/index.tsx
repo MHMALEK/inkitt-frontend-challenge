@@ -1,11 +1,17 @@
-import React, { useCallback, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // mock data
-import mockComments from '../../../../mock/final-data.json';
+// utils
 import { randomIdGenerator } from 'Src/utils/generator';
-import commentTreeHandler from '../../../utils/comment-tree';
+// immutable helper
 import update from 'immutability-helper';
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addCommentAction,
+  getCommentsAction,
+} from 'Store/modules/comments/action';
+import { State } from 'Store/index';
 
-console.log(commentTreeHandler);
 const Comment: React.FC<any> = ({ data, add }) => {
   const [commentData, setCommentData] = useState(data);
   return (
@@ -49,43 +55,37 @@ const Comment: React.FC<any> = ({ data, add }) => {
 };
 
 const MainScreen = () => {
-  const commentsImutableData = Immutable.List(mockComments);
-  const [data, setData] = useState(mockComments);
   const [name, setName] = useState('');
-
-  const add = ({ cc, id }: any): any => {
-    // // console.log(newData)
-    // const newCollection = update(mockComments, {
-    //   0: {
-    //     replies: {
-    //       0: {
-    //         replies: {
-    //           0: {
-    //             replies: {
-    //               $push: [cc],
-    //             },
-    //           },
-    //         },
-    //       },
-    //     },
-    //   },
-    // });
-    // console.log(newCollection);
-    // setData(newCollection);
-  };
-  useCallback(() => {
-    null;
+  const dispatch = useDispatch();
+  const comments = useSelector(
+    (state: State) => state.commentsState.commentsList,
+  );
+  const isPending = useSelector(
+    (state: State) => state.commentsState.isPending,
+  );
+  // did mount fetch comments from mock api
+  useEffect(() => {
+    dispatch(getCommentsAction());
   }, []);
+
+  const add = (cc: any): any => {
+    // const currentData = data;
+    // const newCollection = update(currentData, {
+    //   $push: [cc],
+    // });
+    // setData(newCollection);
+    dispatch(addCommentAction(cc));
+  };
 
   return (
     <>
-      {data.map(comment => {
+      {comments.map(comment => {
         return (
           <Comment
             key={comment.id}
             data={comment}
             add={add}
-          ></Comment>
+          />
         );
       })}
       <input
@@ -95,7 +95,7 @@ const MainScreen = () => {
       <button
         onClick={() =>
           add({
-            id: Math.random(),
+            id: randomIdGenerator(5),
             user_name: name,
             created_date: '',
             up_votes: 10,
@@ -104,7 +104,7 @@ const MainScreen = () => {
           })
         }
       >
-        add to
+        add to main
       </button>
     </>
   );
