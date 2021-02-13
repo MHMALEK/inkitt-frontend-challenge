@@ -1,5 +1,3 @@
-type RootProviderProps = {
-  children: React.ReactNode;
-};
+type RootProviderProps = Record<string, unknown>;
 
 export default RootProviderProps;

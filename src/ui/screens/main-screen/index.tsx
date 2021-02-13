@@ -13,6 +13,8 @@ import { State } from 'Store/index';
 import { randomIdGenerator } from 'Src/utils/generator';
 import DEFAULT_PARAMS from 'Src/contstants';
 import AddNewCommentArea from 'Src/ui/components/common/comment-form';
+import convertIsoStringToDate from 'Src/utils/date';
+import ScrollToCommentSection from 'Src/ui/components/common/scroll-to-section';
 
 const MainScreen: React.FC<Record<string, never>> = () => {
   const [commentContent, setCommentContent] = useState('');
@@ -35,11 +37,14 @@ const MainScreen: React.FC<Record<string, never>> = () => {
   };
 
   const addNewComment = (): void => {
+    const today = convertIsoStringToDate(
+      new Date().toISOString(),
+    );
     dispatch(
       addCommentAction({
         id: randomIdGenerator(5),
         user_name: DEFAULT_PARAMS.defaultUserName,
-        created_date: '',
+        created_date: today,
         up_votes: 10,
         down_votes: 20,
         replies: [],
@@ -60,12 +65,20 @@ const MainScreen: React.FC<Record<string, never>> = () => {
           />
         );
       })}
+      <ScrollToCommentSection anchorId='d' />
 
-      <AddNewCommentArea
-        onSubmit={addNewComment}
-        onChange={handleCommentContentChange}
-        value={commentContent}
-      />
+      <div className='px-4 pt-8 mt-10 bg-white shadow-md'>
+        <div className='container mx-auto'>
+          <p className='pl-2 text-gray-500 text-sm'>
+            Share your ideas! what do you think?
+          </p>
+          <AddNewCommentArea
+            onSubmit={addNewComment}
+            onChange={handleCommentContentChange}
+            value={commentContent}
+          />
+        </div>
+      </div>
     </>
   );
 };

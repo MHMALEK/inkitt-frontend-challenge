@@ -3,10 +3,6 @@ import React from 'react';
 import RootProvider from 'Providers/index';
 
 const BootstrapApp = () => {
-  return (
-    <RootProvider>
-      <p>salam</p>
-    </RootProvider>
-  );
+  return <RootProvider />;
 };
 export default hot(BootstrapApp);
