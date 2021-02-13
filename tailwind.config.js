@@ -11,17 +11,14 @@ module.exports = {
       lg: '976px',
       xl: '1440px',
     },
-    colors: {
-      gray: colors.coolGray,
-      red: colors.rose,
-      pink: colors.fuchsia,
-    },
+
     fontFamily: {
       sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
     },
     fontSize: {
-      sm: ['12px', '20px'],
+      xs: ['12px', '16px'],
+      sm: ['14px', '20px'],
       base: ['16px', '24px'],
       lg: ['20px', '28px'],
       xl: ['24px', '32px'],
