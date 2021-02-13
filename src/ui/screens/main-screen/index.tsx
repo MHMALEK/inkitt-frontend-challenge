@@ -1,24 +1,71 @@
-import React from 'react';
-import mockComments from '../../../../mock/data.json';
+import React, { useEffect, useState } from 'react';
+// component
+import CommentItem from 'Src/ui/components/common/comment-item';
+// redux
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addCommentAction,
+  getCommentsAction,
+} from 'Store/modules/comments/action';
+import { State } from 'Store/index';
 
-const Comment: React.FC<any> = ({ data }) => {
-  return (
-    <div style={{ borderLeft: '1px solid gray', marginLeft: 20 }}>
-      id is {data.id} - name: {data.user_name}
-      {data.replies &&
-        data.replies.map((item: any, index: number) => (
-          <Comment key={index} data={item} />
-        ))}
-    </div>
+// utils
+import { randomIdGenerator } from 'Src/utils/generator';
+import DEFAULT_PARAMS from 'Src/contstants';
+import AddNewCommentArea from 'Src/ui/components/common/comment-form';
+
+const MainScreen: React.FC<Record<string, never>> = () => {
+  const [commentContent, setCommentContent] = useState('');
+  const dispatch = useDispatch();
+  const comments = useSelector(
+    (state: State) => state.commentsState.commentsList,
   );
-};
+  const isPending = useSelector(
+    (state: State) => state.commentsState.isPending,
+  );
+  // did mount fetch comments from mock api
+  useEffect(() => {
+    dispatch(getCommentsAction());
+  }, []);
 
-const MainScreen = () => {
+  const handleCommentContentChange: (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => void = ({ target: { value } }) => {
+    setCommentContent(value);
+  };
+
+  const addNewComment = (): void => {
+    dispatch(
+      addCommentAction({
+        id: randomIdGenerator(5),
+        user_name: DEFAULT_PARAMS.defaultUserName,
+        created_date: '',
+        up_votes: 10,
+        down_votes: 20,
+        replies: [],
+        content: commentContent,
+        avatar_url: DEFAULT_PARAMS.defaultAvatarUrl,
+      }),
+    );
+  };
+
   return (
     <>
-      {mockComments.map(comment => {
-        return <Comment key={comment.id} data={comment}></Comment>;
+      {comments.map(comment => {
+        return (
+          <CommentItem
+            key={comment.id}
+            data={comment}
+            level={0}
+          />
+        );
       })}
+
+      <AddNewCommentArea
+        onSubmit={addNewComment}
+        onChange={handleCommentContentChange}
+        value={commentContent}
+      />
     </>
   );
 };
