@@ -8,5 +8,6 @@
 **/postcss.config.js
 **/setup
 **/tailwind.config.js
+**/mock
 
 

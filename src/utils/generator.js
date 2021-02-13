@@ -1,0 +1,25 @@
+const randomIdGenerator = (length = 5) => {
+  let result = '';
+  const characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(
+      Math.floor(Math.random() * charactersLength),
+    );
+  }
+  return result;
+};
+
+// generate random date for comment if needed
+const randomDateGenerator = (
+  start = new Date(2012, 0, 1),
+  end = new Date(),
+) => {
+  return new Date(
+    start.getTime() +
+      Math.random() * (end.getTime() - start.getTime()),
+  );
+};
+
+export { randomIdGenerator, randomDateGenerator };
