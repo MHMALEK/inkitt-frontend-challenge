@@ -4,7 +4,8 @@ const common = require('./webpack.common');
 
 // webpack plugins
 const TerserPlugin = require('terser-webpack-plugin');
-const WebpackBundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const WebpackBundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -85,9 +86,9 @@ module.exports = merge(common, {
       defaultSizes: 'gzip',
     }),
 
-    new SentryCliPlugin({
-      include: '.',
-      ignore: ['node_modules', 'setup'],
-    }),
+    // new SentryCliPlugin({
+    //   include: '.',
+    //   ignore: ['node_modules', 'setup'],
+    // }),
   ],
 });

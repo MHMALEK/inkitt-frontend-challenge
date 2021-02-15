@@ -1,13 +1,19 @@
-**/node_modules
+# directories
+**/setup
+**/mock
+**/dist
 **/build
-**/package.json
-**/yarn.lock
-**/package-lock.json
+
+# config files
+**/postcss.config.js
+**/tailwind.config.js
+**/jest.config.js
 **/.eslintrc.js
 **/tsconfig.json
-**/postcss.config.js
-**/setup
-**/tailwind.config.js
-**/mock
 
+# node
+**/node_modules
+**/package.json
+**/package-lock.json
+**/yarn.lock
 
