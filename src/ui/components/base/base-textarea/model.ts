@@ -5,4 +5,5 @@ export type BaseTextAreaPropsType = {
   name: string;
   value: string;
   className?: string;
+  placeholder?: string;
 };

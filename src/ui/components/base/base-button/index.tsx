@@ -13,7 +13,7 @@ const BaseButton: React.FC<BaseButtonPropsType> = ({
 }) => {
   return (
     <button
-      className={classnames('btn', 'fromBottom')}
+      className={classnames('btn', 'fromBottom', className)}
       onClick={onClick}
     >
       <span>{children}</span>

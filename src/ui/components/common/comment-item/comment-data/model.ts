@@ -1,6 +1,4 @@
-import CommentItemPropsType, {
-  CommentItemType,
-} from '../model';
+import { CommentItemType } from '../model';
 
 export type CommentDataPropsType = {
   data: {

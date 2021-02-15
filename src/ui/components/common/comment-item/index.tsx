@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { randomIdGenerator } from 'Src/utils/generator';
 
 // transitions
-import {
-  CSSTransition,
-  TransitionGroup,
-} from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
 // types
 import CommentItemProps, { CommentItemType } from './model';
@@ -98,10 +95,7 @@ const CommentItem: React.FC<CommentItemProps> = ({
           </p>
           <div className='flex ml-2 items-center flex-wrap '>
             <a className='text-indigo-500 text-sm inline-flex items-center md:mb-2 lg:mb-0'>
-              <BaseButton
-                onClick={handleToggleCommentForm}
-                className='flex items-center text-xs inline-block px-6 leading-6 text-center text-gray-400  transition bg-transparent border-2 rounded-full ripple hover:bg-green-300 hover:text-white hover:border-white focus:outline-none waves-effect'
-              >
+              <BaseButton onClick={handleToggleCommentForm}>
                 <span>Reply</span>
               </BaseButton>
             </a>

@@ -74,9 +74,9 @@ const MainScreen: React.FC<Record<string, never>> = () => {
             {isPending ? (
               Array.from(
                 'placeholder-loading',
-              ).map((item, index) => (
+              ).map(item => (
                 <SampleCommentPlaceHolderLoading
-                  key={index}
+                  key={item}
                 />
               ))
             ) : (

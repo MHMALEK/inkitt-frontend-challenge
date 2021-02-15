@@ -1,17 +1,9 @@
 class ErrorHandler {
-  networkErrorHandler(error) {
-    // do something with errors that come from network
-    if (error.response) {
-      switch (error.response.status) {
-        case 400:
-          break;
-        default:
-      }
-    }
+  networkErrorHandler(error: ErrorEvent) {
     return { error };
   }
 
-  componentErrorHandler(error) {
+  componentErrorHandler(error: Error) {
     return error;
   }
 }
