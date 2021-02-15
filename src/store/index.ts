@@ -21,7 +21,7 @@ export interface State {
 }
 declare global {
   interface Window {
-    __REDUX_DEVTOOLS_EXTENSION__: any;
+    __REDUX_DEVTOOLS_EXTENSION__?: typeof compose;
   }
 }
 
@@ -36,8 +36,8 @@ const store: Store = createStore(
   reducers,
   compose(
     applyMiddleware(sagaMiddleware),
-    (window as Window).__REDUX_DEVTOOLS_EXTENSION__
-      ? (window as Window).__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__
+      ? window.__REDUX_DEVTOOLS_EXTENSION__()
       : (noop: null) => noop,
   ),
 );

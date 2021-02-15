@@ -1,3 +1,3 @@
 export type ScrollToSectionProps = {
-  anchorId: string;
+  anchorId?: string;
 };
