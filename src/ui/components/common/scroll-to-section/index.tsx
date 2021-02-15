@@ -1,14 +1,12 @@
 import React from 'react';
 import { ScrollToSectionProps } from './model';
 
-const ScrollToCommentSection: React.FC<ScrollToSectionProps> = ({
-  anchorId,
-}) => {
+const ScrollToCommentSection: React.FC<ScrollToSectionProps> = () => {
   const handleAnchorClick = () =>
     window.scrollTo(0, document.body.scrollHeight);
   return (
     <div
-      className='sticky bottom-5 ml-5'
+      className='sticky bottom-2 z-10 -left-4'
       onClick={handleAnchorClick}
     >
       <button className='inline-block p-3 text-center text-white transition bg-blue-700 rounded-full shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none waves-effect  transition duration-500 transform hover:scale-150'>

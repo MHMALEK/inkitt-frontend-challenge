@@ -1,4 +1,11 @@
 import React, { useEffect, useState } from 'react';
+
+// transitions
+import {
+  CSSTransition,
+  TransitionGroup,
+} from 'react-transition-group';
+
 // component
 import CommentItem from 'Src/ui/components/common/comment-item';
 // redux
@@ -15,6 +22,7 @@ import DEFAULT_PARAMS from 'Src/contstants';
 import AddNewCommentArea from 'Src/ui/components/common/comment-form';
 import convertIsoStringToDate from 'Src/utils/date';
 import ScrollToCommentSection from 'Src/ui/components/common/scroll-to-section';
+import SampleCommentPlaceHolderLoading from 'Src/ui/components/common/place-holder-loading';
 
 const MainScreen: React.FC<Record<string, never>> = () => {
   const [commentContent, setCommentContent] = useState('');
@@ -55,31 +63,54 @@ const MainScreen: React.FC<Record<string, never>> = () => {
   };
 
   return (
-    <>
-      {comments.map(comment => {
-        return (
-          <CommentItem
-            key={comment.id}
-            data={comment}
-            level={0}
-          />
-        );
-      })}
-      <ScrollToCommentSection anchorId='d' />
+    <div className='container mx-auto mb-6'>
+      <TransitionGroup>
+        <CSSTransition
+          key={2}
+          timeout={1500}
+          classNames='fade'
+        >
+          <>
+            {isPending ? (
+              Array.from(
+                'placeholder-loading',
+              ).map(item => (
+                <SampleCommentPlaceHolderLoading
+                  key={item}
+                />
+              ))
+            ) : (
+              <>
+                <TransitionGroup>
+                  {comments.length > 0 &&
+                    comments.map(comment => {
+                      return (
+                        <CSSTransition
+                          key={comment.id}
+                          timeout={1500}
+                          classNames='fade'
+                        >
+                          <CommentItem
+                            data={comment}
+                            level={0}
+                          />
+                        </CSSTransition>
+                      );
+                    })}
+                </TransitionGroup>
+                <ScrollToCommentSection anchorId='d' />
 
-      <div className='px-4 pt-8 mt-10 bg-white shadow-md'>
-        <div className='container mx-auto'>
-          <p className='pl-2 text-gray-500 text-sm'>
-            Share your ideas! what do you think?
-          </p>
-          <AddNewCommentArea
-            onSubmit={addNewComment}
-            onChange={handleCommentContentChange}
-            value={commentContent}
-          />
-        </div>
-      </div>
-    </>
+                <AddNewCommentArea
+                  onSubmit={addNewComment}
+                  onChange={handleCommentContentChange}
+                  value={commentContent}
+                />
+              </>
+            )}
+          </>
+        </CSSTransition>
+      </TransitionGroup>
+    </div>
   );
 };
 export default MainScreen;

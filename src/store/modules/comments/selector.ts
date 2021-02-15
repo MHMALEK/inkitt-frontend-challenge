@@ -1,4 +1,3 @@
-import { select } from 'redux-saga/effects';
 import { State } from 'Store/index';
 const selectCommentsList = (state: State) =>
   state.commentsState.commentsList;

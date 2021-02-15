@@ -21,25 +21,22 @@ const AddNewCommentArea: React.FC<CommentTextAreaPropsType> = ({
         onSubmit={handleSubmit}
         className='w-full px-2 pt-2'
       >
-        <div className='flex flex-wrap -mx-3 mb-6'>
+        <div className='flex flex-wrap  mb-6'>
           <div className='w-full md:w-full px-3 mb-2 mt-2'>
-            <textarea
+            <BaseTextarea
               className=' shadow-lg rounded border border-gray-200 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-400 focus:outline-none focus:bg-white text-sm'
               name='body'
-              placeholder='Type Your Comment'
-              required
+              placeholder='Type Your Comment and share your ideas!'
               value={value}
               onChange={onChange}
-            ></textarea>
+            />
           </div>
           <div className='w-full md:w-full flex items-start md:w-full px-3'>
             <div className='flex items-start w-1/2 text-gray-700 px-2 mr-auto'></div>
             <div className='-mr-1'>
-              <input
-                type='submit'
-                className='cursor-pointer text-xs inline-block px-6 py-1 text-xs font-medium leading-6 text-center text-white uppercase transition bg-green-400 rounded-full shadow ripple hover:shadow-lg hover:bg-green-800 focus:outline-none waves-effect'
-                value='Post Comment'
-              />
+              <BaseButton onClick={handleSubmit}>
+                Post Comment
+              </BaseButton>
             </div>
           </div>
         </div>

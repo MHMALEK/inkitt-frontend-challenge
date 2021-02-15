@@ -1,4 +1,7 @@
 import React from 'react';
+import classnames from 'classnames';
+// styles
+import './style.scss';
 
 // model
 import { BaseButtonPropsType } from './model';
@@ -9,8 +12,11 @@ const BaseButton: React.FC<BaseButtonPropsType> = ({
   className,
 }) => {
   return (
-    <button className={className} onClick={onClick}>
-      {children}
+    <button
+      className={classnames('btn', 'fromBottom', className)}
+      onClick={onClick}
+    >
+      <span>{children}</span>
     </button>
   );
 };

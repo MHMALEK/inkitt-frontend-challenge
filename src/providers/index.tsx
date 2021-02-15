@@ -5,7 +5,7 @@ import DataProvider from './data-provider';
 import ErrorProvider from './error-provider/error-boundary';
 import RootProviderProps from './model';
 
-const RootProvider: React.FC<RootProviderProps> = ({ children }) => (
+const RootProvider: React.FC<RootProviderProps> = () => (
   <DataProvider>
     <AppProvider>
       <ErrorProvider>

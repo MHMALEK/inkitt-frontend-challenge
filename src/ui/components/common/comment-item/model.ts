@@ -4,7 +4,7 @@ export interface CommentItemType {
   created_date: string;
   up_votes: number;
   down_votes: number;
-  replies: any;
+  replies: Array<CommentItemType>;
   content: string;
   avatar_url: string;
 }
