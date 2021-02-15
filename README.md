@@ -20,14 +20,6 @@ it has:
 - to start server just use this command `npm start`. it will be run on port 4000.
 - to start server with docker you can use docker file that is provided.
 
-## tools:
-
-- Custom Webpack config
-- Test with jest and Cypress for functional tests
-- webpack as module bundler
-- babel as Typescript and ES6 transpiler
-- docker and docker compose
-
 ## project structure
 
 ```
@@ -54,7 +46,7 @@ it has:
 
 │ ├── mock-server: the mocke server util to handle mock data in app
 
-│ ├── providers # main app providers (inclduing error provider. error-handler for my project is often use for a source of error handling for all error happening in project. app provider to handle the app start configs and actions. data provider to add redux or any data-provider might be needed)
+│ ├── providers # main app providers (inclduing error provider, app provider for config splash and init data and data provider to add redux or any data-provider might be needed)
 
 │ ├── services # main services of project. here is just an simulator of api call.
 
@@ -81,10 +73,6 @@ it has:
 
 
 ```
-
-## Why custom webpack config
-
-I tried to do a little more in here to show case what I can do so I decided to use a customized webpack config and not use CRA or any boilerplate. I got some ideas but not another fork of them.
 
 # final words
 
